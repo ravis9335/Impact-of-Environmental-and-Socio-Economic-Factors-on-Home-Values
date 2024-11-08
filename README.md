@@ -18,7 +18,8 @@ Below are some essential code snippets used in this analysis:
 Data Exploration
 
 To gain initial insights, we started by exploring the data with summary statistics and visualizations:
-'library(MASS)
+```
+library(MASS)
 data(Boston)
 
 # Summary statistics
@@ -28,20 +29,25 @@ summary(Boston)
 cor(Boston)
 
 # Pairwise scatter plot
-pairs(~nox + crim + rm + medv, data = Boston)'
+pairs(~nox + crim + rm + medv, data = Boston) 
+```
 
 Linear Regression Model
 
 A baseline linear regression model was created to quantify the relationships between predictors and median home values (MEDV):
-'# Linear regression with NOX, CRIM, and RM as predictors for MEDV
+
+```
+# Linear regression with NOX, CRIM, and RM as predictors for MEDV
 linear_model <- lm(medv ~ nox + crim + rm, data = Boston)
 summary(linear_model)
-plot(linear_model)'
+plot(linear_model)
+```
 
 Ridge Regression
 
 To improve model stability and address multicollinearity, we applied ridge regression, which applies regularization to the linear model:
-'# Install and load glmnet for ridge regression
+```
+# Install and load glmnet for ridge regression
 install.packages("glmnet")
 library(glmnet)
 
@@ -53,7 +59,8 @@ y <- Boston$medv
 grid <- 10^seq(10, -2, length = 100)
 ridge_model <- cv.glmnet(x, y, alpha = 0, lambda = grid, standardize = TRUE)
 plot(ridge_model)
-coef(ridge_model, s = "lambda.min")'
+coef(ridge_model, s = "lambda.min")
+```
 
 Key Findings
 
